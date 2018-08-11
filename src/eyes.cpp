@@ -1,7 +1,7 @@
 //-- Подключение библиотек
-#include "data/objdetect.hpp"
-#include "data/highgui.hpp"
-#include "data/imgproc.hpp"
+#include "opencv2/objdetect/objdetect.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
 #include <iostream>
 #include <fstream> 
 
@@ -36,8 +36,8 @@ int language; // 1 - английский, 2 - русский
 String alfavit_eng = "abcdefghijklmnopqrstuvwxyz";
 String alfavit_rus = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
 //-- Каскады
-String face_cascade_name = "data/lbpcascade_frontalface.xml";
-String eyes_cascade_name = "data/haarcascade_eye_tree_eyeglasses.xml";
+String face_cascade_name = "../data/lbpcascade_frontalface.xml";
+String eyes_cascade_name = "../data/haarcascade_eye_tree_eyeglasses.xml";
 CascadeClassifier face_cascade;
 CascadeClassifier eyes_cascade;
 String window_name = "PC control eyes";
@@ -207,7 +207,7 @@ void LoadSettings() {
     // Создаём поток
     ifstream FILE;
     // Открываем файл
-    FILE.open("data/settings.dat", ios::in);
+    FILE.open("../data/settings.dat", ios::in);
     char value[3];
     // Считываем данные
     FILE>>value;
@@ -228,8 +228,8 @@ void LoadSettings() {
 void GUI() {
     // Если текущая раскладка -- английская
     if (language == 1) {
-        cv::Mat image2 = imread("data/alfavit_eng.png");
-        cv::Mat image3 = imread("data/mousepanel.png");
+        cv::Mat image2 = imread("../data/alfavit_eng.png");
+        cv::Mat image3 = imread("../data/mousepanel.png");
         // Отрисовка выбранной буквы, или пиктограммы 
         RectangleGUI();
         mat_image = image + image2 + image3;
@@ -237,8 +237,8 @@ void GUI() {
     // Если текущая раскладка -- русская
     if (language == 2) {
         Mat image1 = image;
-        cv::Mat image2 = imread("data/alfavit_rus.png");
-        cv::Mat image3 = imread("data/mousepanel.png");
+        cv::Mat image2 = imread("../data/alfavit_rus.png");
+        cv::Mat image3 = imread("../data/mousepanel.png");
         // Отрисовка выбранной буквы, или пиктограммы 
         RectangleGUI();
         mat_image = image + image2 + image3;
