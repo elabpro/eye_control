@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>src/EyesControl.h</itemPath>
+      <itemPath>src/InputControl.h</itemPath>
+      <itemPath>src/Settings.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+      <itemPath>data/alfavit_eng.png</itemPath>
+      <itemPath>data/alfavit_rus.png</itemPath>
+      <itemPath>data/haarcascade_eye_tree_eyeglasses.xml</itemPath>
+      <itemPath>data/lbpcascade_frontalface.xml</itemPath>
+      <itemPath>data/mousepanel.png</itemPath>
+      <itemPath>data/settings.dat</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>src/EyesControl.cpp</itemPath>
+      <itemPath>src/InputControl.cpp</itemPath>
+      <itemPath>src/Settings.cpp</itemPath>
+      <itemPath>src/main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f2"
+                     displayName="InputControlTest"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/InputControlTest.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1"
+                     displayName="SettingsTest"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/SettingsTest.cpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>11</standard>
+          <commandLine>-fprofile-arcs -ftest-coverage</commandLine>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>`pkg-config --libs opencv`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="data/alfavit_eng.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="data/alfavit_rus.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="data/haarcascade_eye_tree_eyeglasses.xml"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="data/lbpcascade_frontalface.xml" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="data/mousepanel.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="data/settings.dat" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
+      <item path="src/EyesControl.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/EyesControl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/InputControl.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/InputControl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Settings.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Settings.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/InputControlTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/SettingsTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>11</standard>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>`pkg-config --libs opencv`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="data/alfavit_eng.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="data/alfavit_rus.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="data/haarcascade_eye_tree_eyeglasses.xml"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="data/lbpcascade_frontalface.xml" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="data/mousepanel.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="data/settings.dat" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
+      <item path="src/EyesControl.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/EyesControl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/InputControl.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/InputControl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Settings.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Settings.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/InputControlTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/SettingsTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
