@@ -104,7 +104,7 @@ build-tests: .build-tests-post
 test: .test-post
 	lcov --directory build/Debug/GNU-Linux/src/ --capture --output-file report.info
 	genhtml -o tests-report/ report.info
-	firefox tests-report/index.html
+#	firefox tests-report/index.html
 
 .test-pre: build-tests
 # Add your pre 'test' code here...
