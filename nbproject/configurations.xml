@@ -30,17 +30,29 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f3"
+                     displayName="EyesControlTest"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/EyesControlTest.cpp</itemPath>
+        <itemPath>tests/EyesControlTest.h</itemPath>
+        <itemPath>tests/newtestrunner2.cpp</itemPath>
+      </logicalFolder>
       <logicalFolder name="f2"
                      displayName="InputControlTest"
                      projectFiles="true"
                      kind="TEST">
         <itemPath>tests/InputControlTest.cpp</itemPath>
+        <itemPath>tests/InputControlTest.h</itemPath>
+        <itemPath>tests/newtestrunner1.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f1"
                      displayName="SettingsTest"
                      projectFiles="true"
                      kind="TEST">
         <itemPath>tests/SettingsTest.cpp</itemPath>
+        <itemPath>tests/SettingsTest.h</itemPath>
+        <itemPath>tests/newtestrunner.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -69,6 +81,23 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <packaging>
+        <packType>Tar</packType>
+        <packFileList>
+          <packFileListElem type="Dir"
+                            to="${PACKAGE_TOP_DIR}data"
+                            from=""
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+      </packaging>
       <item path="data/alfavit_eng.png" ex="false" tool="3" flavor2="0">
       </item>
       <item path="data/alfavit_rus.png" ex="false" tool="3" flavor2="0">
@@ -86,32 +115,44 @@
       </item>
       <folder path="TestFiles/f1">
         <cTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
         </cTool>
         <ccTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
         </linkerTool>
       </folder>
       <folder path="TestFiles/f2">
         <cTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
         </cTool>
         <ccTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f2</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
         </linkerTool>
       </folder>
       <item path="src/EyesControl.cpp" ex="false" tool="1" flavor2="0">
@@ -128,9 +169,23 @@
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="tests/EyesControlTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/EyesControlTest.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/InputControlTest.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="tests/InputControlTest.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/SettingsTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/SettingsTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/newtestrunner.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/newtestrunner1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/newtestrunner2.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -159,6 +214,60 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <packaging>
+        <packType>Debian</packType>
+        <packFileList>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/data/alfavit_eng.png"
+                            from="data/alfavit_eng.png"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/data/lbpcascade_frontalface.xml"
+                            from="data/lbpcascade_frontalface.xml"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/data/alfavit_rus.png"
+                            from="data/alfavit_rus.png"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/data/settings.dat"
+                            from="data/settings.dat"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/data/mousepanel.png"
+                            from="data/mousepanel.png"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/data/haarcascade_eye_tree_eyeglasses.xml"
+                            from="data/haarcascade_eye_tree_eyeglasses.xml"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+        <packInfoList>
+          <packInfoListElem name="Package" value="eyecontrol-1.3" mandatory="true"/>
+          <packInfoListElem name="Version" value="1.0" mandatory="true"/>
+          <packInfoListElem name="Architecture" value="amd64" mandatory="false"/>
+          <packInfoListElem name="Maintainer" value="eugine" mandatory="false"/>
+          <packInfoListElem name="Description" value="..." mandatory="false"/>
+        </packInfoList>
+      </packaging>
       <item path="data/alfavit_eng.png" ex="false" tool="3" flavor2="0">
       </item>
       <item path="data/alfavit_rus.png" ex="false" tool="3" flavor2="0">
@@ -176,32 +285,44 @@
       </item>
       <folder path="TestFiles/f1">
         <cTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
         </cTool>
         <ccTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
         </linkerTool>
       </folder>
       <folder path="TestFiles/f2">
         <cTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
         </cTool>
         <ccTool>
-          <incDir>
-            <pElem>.</pElem>
-          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f2</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
         </linkerTool>
       </folder>
       <item path="src/EyesControl.cpp" ex="false" tool="1" flavor2="0">
@@ -218,9 +339,23 @@
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="tests/EyesControlTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/EyesControlTest.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/InputControlTest.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="tests/InputControlTest.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/SettingsTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/SettingsTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/newtestrunner.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/newtestrunner1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/newtestrunner2.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

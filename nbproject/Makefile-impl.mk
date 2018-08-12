@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=EyeControl-1.2
+PROJECTNAME=EyeControl-1.3
 
 # Active Configuration
 DEFAULTCONF=Debug

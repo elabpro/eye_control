@@ -8,36 +8,33 @@
  * File:   InputControlTest.cpp
  * Author: eugine
  *
- * Created on August 11, 2018, 10:34 PM
+ * Created on Aug 11, 2018, 11:48:03 PM
  */
 
-#include <stdlib.h>
-#include <iostream>
-#include "src/InputControl.h"
+#include "InputControlTest.h"
+#include "../src/InputControl.h"
 
-/*
- * Simple C++ Test Suite
- */
 
-void testProcess() {
-    int p0 = 0;
-    InputControl inputControl;
-    int result = inputControl.process(p0);
-    if (result == 1) {
-        std::cout << "%TEST_FAILED% time=0 testname=testProcess (InputControlTest) message=error message sample" << std::endl;
-    }
+CPPUNIT_TEST_SUITE_REGISTRATION(InputControlTest);
+
+InputControlTest::InputControlTest() {
 }
 
-int main(int argc, char** argv) {
-    std::cout << "%SUITE_STARTING% InputControlTest" << std::endl;
-    std::cout << "%SUITE_STARTED%" << std::endl;
+InputControlTest::~InputControlTest() {
+}
 
-    std::cout << "%TEST_STARTED% testProcess (InputControlTest)" << std::endl;
-    testProcess();
-    std::cout << "%TEST_FINISHED% time=0 testProcess (InputControlTest)" << std::endl;
+void InputControlTest::setUp() {
+}
 
-    std::cout << "%SUITE_FINISHED% time=0" << std::endl;
+void InputControlTest::tearDown() {
+}
 
-    return (EXIT_SUCCESS);
+void InputControlTest::testProcess() {
+    int p0;
+    InputControl inputControl;
+    int result = inputControl.process(p0);
+    if (true /*check result*/) {
+        CPPUNIT_ASSERT(false);
+    }
 }
 

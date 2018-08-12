@@ -8,35 +8,32 @@
  * File:   SettingsTest.cpp
  * Author: eugine
  *
- * Created on August 11, 2018, 10:21 PM
+ * Created on Aug 11, 2018, 11:34:51 PM
  */
 
-#include <stdlib.h>
-#include <iostream>
-#include "src/Settings.h"
+#include "SettingsTest.h"
+#include "../src/Settings.h"
 
-/*
- * Simple C++ Test Suite
- */
 
-void testLoad() {
-    Settings settings;
-    int result = settings.load();
-    if (result != 1) {
-        std::cout << "%TEST_FAILED% time=0 testname=testLoad (SettingsTest) message=error message sample" << std::endl;
-    }
+CPPUNIT_TEST_SUITE_REGISTRATION(SettingsTest);
+
+SettingsTest::SettingsTest() {
 }
 
-int main(int argc, char** argv) {
-    std::cout << "%SUITE_STARTING% SettingsTest" << std::endl;
-    std::cout << "%SUITE_STARTED%" << std::endl;
+SettingsTest::~SettingsTest() {
+}
 
-    std::cout << "%TEST_STARTED% testLoad (SettingsTest)" << std::endl;
-    testLoad();
-    std::cout << "%TEST_FINISHED% time=0 testLoad (SettingsTest)" << std::endl;
+void SettingsTest::setUp() {
+}
 
-    std::cout << "%SUITE_FINISHED% time=0" << std::endl;
+void SettingsTest::tearDown() {
+}
 
-    return (EXIT_SUCCESS);
+void SettingsTest::testLoad() {
+    Settings settings;
+    int result = settings.load();
+    if (result == 0) {
+        CPPUNIT_ASSERT(true);
+    }
 }
 

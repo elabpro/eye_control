@@ -13,9 +13,9 @@ CND_BUILDDIR=build
 CND_DLIB_EXT=so
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/eyecontrol-1.2
-OUTPUT_BASENAME=eyecontrol-1.2
-PACKAGE_TOP_DIR=eyecontrol-1.2/
+OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/eyecontrol-1.3
+OUTPUT_BASENAME=eyecontrol-1.3
+PACKAGE_TOP_DIR=eyecontrol-1.3/
 
 # Functions
 function checkReturnCode
@@ -60,15 +60,18 @@ mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory "${NBTMPDIR}/eyecontrol-1.2/bin"
+makeDirectory  "${NBTMPDIR}/${PACKAGE_TOP_DIR}data" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/eyecontrol-1.3/bin"
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/eyecontrol-1.2.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/eyecontrol-1.3.tar
 cd ${NBTMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/eyecontrol-1.2.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/eyecontrol-1.3.tar *
 checkReturnCode
 
 # Cleanup
