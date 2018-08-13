@@ -22,6 +22,7 @@ class EyesControlTest : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST(testDetectAndShow);
     CPPUNIT_TEST(testDetect);
     CPPUNIT_TEST(testRectangleGUI);
+    CPPUNIT_TEST(testGetAction);
 
     CPPUNIT_TEST_SUITE_END();
 
@@ -35,6 +36,7 @@ private:
     void testDetectAndShow();
     void testDetect();
     void testRectangleGUI();
+    void testGetAction();
 
 };
 

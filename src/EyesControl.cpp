@@ -228,5 +228,18 @@ int EyesControl::getAction() {
         s->rightglaz = 0;
         result = 1;
     }
+    
+        //-- Если разница слишком небольшая - идём на ещё один круг по проверке вход.изобр.
+    if (((s->glaz1 >= s->glaztime)
+            and (s->glaz1 > s->glaz2)
+            and (s->glaz2 >= ceil(s->glaztime * 0.8)))) // -20%
+    {
+        s->glaz0 = 0;
+        s->glaz1 = ceil(s->glaztime * 0.35); // -65%
+        s->glaz2 = ceil(s->glaztime * 0.35);
+        s->leftglaz = ceil(s->glaztime * 0.35);
+        s->rightglaz = ceil(s->glaztime * 0.35);
+        result = 2;
+    }
     return result;
 }
