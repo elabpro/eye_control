@@ -50,6 +50,7 @@ public:
     String alfavit_eng;
     String alfavit_rus;
     String window_name;
+    int setEye(int,int);
 private:
 };
 
