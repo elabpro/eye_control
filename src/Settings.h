@@ -49,6 +49,8 @@ public:
     //-- Алфавиты
     String alfavit_eng;
     String alfavit_rus;
+    String alfavit_rus_png;
+    String alfavit_eng_png;
     String window_name;
 private:
 };

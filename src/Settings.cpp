@@ -30,6 +30,8 @@ int Settings::load() {
     //-- Алфавиты
     alfavit_eng = "abcdefghijklmnopqrstuvwxyz";
     alfavit_rus = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+    alfavit_eng_png = "data/alfavit_eng.png";
+    alfavit_rus_png = "data/alfavit_rus.png";
     window_name = "PC control eyes";
     //-- Устанавливаем начальные значения
     glaz0 = 0;

@@ -57,7 +57,7 @@ IplImage* EyesControl::detectAndShow() {
 /**
  * Function to detect eyes on a face with OpenCV2
  */
-int EyesControl::detectEyes() {
+int EyesControl::detectEyes(Mat& mat_image) {
     std::vector<Rect> faces;
     Mat frame_gray;
 
@@ -76,7 +76,7 @@ int EyesControl::detectEyes() {
                 Size(35, 35));
 
         /** ПРИ НАХОЖДЕНИИ В КАДРЕ ОДНОГО ГЛАЗА */
-        if (eyes.size() == 1) {
+        if (eyes.size() == 1 || eyes.size() == 2) {
             //-- Увеличиваем счётчик количества одного глаза на 1
             s->glaz1 = s->glaz1 + 1;
             //-- Отрисовка лица кругом синего цвета
@@ -159,22 +159,18 @@ int EyesControl::detectEyes() {
  * Show webcam image with detected eyes and keyboard(?)
  */
 void EyesControl::show(IplImage& img) {
+    String fileName;
     // Если текущая раскладка -- английская
     if (s->language == 1) {
-        cv::Mat image2 = imread("../data/alfavit_eng.png");
-        cv::Mat image3 = imread("../data/mousepanel.png");
-        // Отрисовка выбранной буквы, или пиктограммы
-        RectangleGUI();
-        mat_image = cv::cvarrToMat(image) + image2 + image3;
+        fileName = s->alfavit_eng_png;
+    } else {
+        fileName = s->alfavit_rus_png;
     }
-    // Если текущая раскладка -- русская
-    if (s->language == 2) {
-        cv::Mat image2 = imread("../data/alfavit_rus.png");
-        cv::Mat image3 = imread("../data/mousepanel.png");
-        // Отрисовка выбранной буквы, или пиктограммы
-        RectangleGUI();
-        mat_image = cv::cvarrToMat(image) + image2 + image3;
-    }
+    cv::Mat image2 = imread(fileName);
+    cv::Mat image3 = imread("../data/mousepanel.png");
+    // Отрисовка выбранной буквы, или пиктограммы
+    RectangleGUI();
+    mat_image = cv::cvarrToMat(image) + image2 + image3;
 }
 
 /**
@@ -210,7 +206,7 @@ void EyesControl::RectangleGUI() {
 
 /**
  * Find out what to do
- * 
+ *
  * @return 0 - nothing, 1 - two eyes are open
  */
 int EyesControl::getAction() {
@@ -228,8 +224,8 @@ int EyesControl::getAction() {
         s->rightglaz = 0;
         result = 1;
     }
-    
-        //-- Если разница слишком небольшая - идём на ещё один круг по проверке вход.изобр.
+
+    //-- Если разница слишком небольшая - идём на ещё один круг по проверке вход.изобр.
     if (((s->glaz1 >= s->glaztime)
             and (s->glaz1 > s->glaz2)
             and (s->glaz2 >= ceil(s->glaztime * 0.8)))) // -20%
