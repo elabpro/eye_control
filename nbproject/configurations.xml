@@ -73,7 +73,7 @@
       <compileType>
         <ccTool>
           <standard>11</standard>
-          <commandLine>-fprofile-arcs -ftest-coverage</commandLine>
+          <commandLine>-fprofile-arcs -ftest-coverage -lcppunit</commandLine>
         </ccTool>
         <linkerTool>
           <linkerLibItems>
@@ -87,6 +87,12 @@
           <packFileListElem type="Dir"
                             to="${PACKAGE_TOP_DIR}data"
                             from=""
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
                             perm="755"
                             owner="root"
                             group="bin"/>
@@ -115,43 +121,43 @@
       </item>
       <folder path="TestFiles/f1">
         <cTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </cTool>
         <ccTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f1</output>
           <linkerLibItems>
-            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs cppunit`</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </folder>
       <folder path="TestFiles/f2">
         <cTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </cTool>
         <ccTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f2</output>
           <linkerLibItems>
-            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs cppunit`</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </folder>
       <folder path="TestFiles/f3">
         <cTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </cTool>
         <ccTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f3</output>
           <linkerLibItems>
-            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs cppunit`</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </folder>
@@ -259,6 +265,12 @@
                             perm="755"
                             owner="root"
                             group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
         </packFileList>
         <packInfoList>
           <packInfoListElem name="Package" value="eyecontrol-1.3" mandatory="true"/>
@@ -285,43 +297,43 @@
       </item>
       <folder path="TestFiles/f1">
         <cTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </cTool>
         <ccTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f1</output>
           <linkerLibItems>
-            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs cppunit`</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </folder>
       <folder path="TestFiles/f2">
         <cTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </cTool>
         <ccTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f2</output>
           <linkerLibItems>
-            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs cppunit`</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </folder>
       <folder path="TestFiles/f3">
         <cTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </cTool>
         <ccTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
+          <commandLine>`pkg-config --cflags cppunit`</commandLine>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f3</output>
           <linkerLibItems>
-            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs cppunit`</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </folder>

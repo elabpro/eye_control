@@ -31,10 +31,11 @@ public:
     int init(Settings& newS);
     virtual ~EyesControl();
     IplImage* detectAndShow();
-    int detect();
+    int detectEyes();
     void RectangleGUI();
     CascadeClassifier face_cascade;
     CascadeClassifier eyes_cascade;
+    int getAction();
 private:
     void show(IplImage&);
     Settings* s;
