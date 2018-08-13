@@ -35,3 +35,11 @@ void SettingsTest::testLoad() {
     CPPUNIT_ASSERT(result == 1);
 }
 
+void SettingsTest::testSetEye() {
+    Settings* settings;
+    settings = new Settings();
+    int result = settings->setEye(1,1);
+    CPPUNIT_ASSERT(result == 1);
+    result = settings->setEye(1,0);
+    CPPUNIT_ASSERT(result == 2);
+}

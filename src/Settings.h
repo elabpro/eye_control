@@ -52,6 +52,7 @@ public:
     String alfavit_rus_png;
     String alfavit_eng_png;
     String window_name;
+    int setEye(int,int);
 private:
 };
 

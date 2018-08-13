@@ -213,8 +213,7 @@ int EyesControl::getAction() {
     int result = 0;
     // Two eyes are open
     if ((s->glaz2 >= ceil(s->glaztime * 0.75))
-            and (s->glaz1 < s->glaz2)) // -25%
-    {
+            && (s->glaz1 < s->glaz2)) {
         s->glaz0 = 0;
         s->glaz1 = 0;
         s->glaz2 = 0;
@@ -227,9 +226,8 @@ int EyesControl::getAction() {
 
     //-- Если разница слишком небольшая - идём на ещё один круг по проверке вход.изобр.
     if (((s->glaz1 >= s->glaztime)
-            and (s->glaz1 > s->glaz2)
-            and (s->glaz2 >= ceil(s->glaztime * 0.8)))) // -20%
-    {
+            && (s->glaz1 > s->glaz2)
+            && (s->glaz2 >= ceil(s->glaztime * 0.8)))) {
         s->glaz0 = 0;
         s->glaz1 = ceil(s->glaztime * 0.35); // -65%
         s->glaz2 = ceil(s->glaztime * 0.35);

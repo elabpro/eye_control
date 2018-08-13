@@ -66,3 +66,29 @@ int Settings::load() {
     }
     return result;
 }
+
+int Settings::setEye(int number, int value) {
+    int* g;
+    switch (number) {
+        case 1:
+        {
+            g = &glaz1;
+            break;
+        }
+        case 2:
+        {
+            g = &glaz2;
+            break;
+        }
+        default:
+        {
+            g = &glaz0;
+        }
+    }
+    if (value > 0) {
+        *g = value;
+    } else {
+        *g = *g + 1;
+    }
+    return *g;
+}

@@ -14,6 +14,7 @@
 #ifndef EYESCONTROLTEST_H
 #define EYESCONTROLTEST_H
 
+#include "../src/EyesControl.h"
 #include <cppunit/extensions/HelperMacros.h>
 
 class EyesControlTest : public CPPUNIT_NS::TestFixture {
@@ -33,6 +34,7 @@ public:
     void tearDown();
 
 private:
+    EyesControl eyesControl;
     void testDetectAndShow();
     void testDetect();
     void testRectangleGUI();
