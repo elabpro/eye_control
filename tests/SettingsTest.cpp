@@ -32,8 +32,6 @@ void SettingsTest::tearDown() {
 void SettingsTest::testLoad() {
     Settings settings;
     int result = settings.load();
-    if (result == 0) {
-        CPPUNIT_ASSERT(true);
-    }
+    CPPUNIT_ASSERT(result == 1);
 }
 

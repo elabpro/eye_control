@@ -48,33 +48,6 @@ int InputControl::process(int regime) {
  */
 int InputControl::InputKey() {
     int result = 0;
-    cout << "InputKey";
-    // Two eyes open
-    if ((s->glaz2 >= ceil(s->glaztime * 0.75))
-            and (s->glaz1 < s->glaz2)) // -25%
-    {
-        s->glaz0 = 0;
-        s->glaz1 = 0;
-        s->glaz2 = 0;
-        s->keynumberleft = 0;
-        s->keynumberright = 0;
-        s->leftglaz = 0;
-        s->rightglaz = 0;
-    }
-
-    //-- Если разница слишком небольшая - идём на ещё один круг по проверке вход.изобр.
-    // If too big time diff -> go to another turn
-    if (((s->glaz1 >= s->glaztime)
-            and (s->glaz1 > s->glaz2)
-            and (s->glaz2 >= ceil(s->glaztime * 0.8)))) // -20%
-    {
-        s->glaz0 = 0;
-        s->glaz1 = ceil(s->glaztime * 0.35); // -65%
-        s->glaz2 = ceil(s->glaztime * 0.35);
-        s->leftglaz = ceil(s->glaztime * 0.35);
-        s->rightglaz = ceil(s->glaztime * 0.35);
-    }
-
 
     //-- Условия для смены раскладки клавиатуры
     // Condition to change language
@@ -182,32 +155,6 @@ int InputControl::InputKey() {
  */
 int InputControl::InputMouse() {
     int result = 0;
-    cout << "InputMouse";
-    //-- Условие для сброса счётчиков (когда два глаза открыты)
-    if ((s->glaz2 >= ceil(s->glaztime * 0.85))
-            and (s->glaz1 < s->glaz2)) // -15%
-    {
-        s->glaz0 = 0;
-        s->glaz1 = 0;
-        s->glaz2 = 0;
-        s->keynumberleft = 0;
-        s->keynumberright = 0;
-        s->leftglaz = 0;
-        s->rightglaz = 0;
-    }
-
-    //-- Если разница слишком небольшая - идём на ещё один круг по проверке вход.изобр.
-    if (((s->glaz1 >= s->glaztime)
-            and (s->glaz1 > s->glaz2)
-            and (s->glaz2 >= ceil(s->glaztime * 0.8)))) // -20%
-    {
-        s->glaz0 = 0;
-        s->glaz1 = ceil(s->glaztime * 0.35); // -65%
-        s->glaz2 = ceil(s->glaztime * 0.35);
-        s->leftglaz = ceil(s->glaztime * 0.35);
-        s->rightglaz = ceil(s->glaztime * 0.35);
-    }
-
     //-- Условия для перехода в режим клавиатуры
     if ((s->glaz0 >= s->glaztimekeyboard)
             and (s->glaz1 <= ceil(s->glaztimekeyboard * 0.85))

@@ -32,9 +32,9 @@ void InputControlTest::tearDown() {
 void InputControlTest::testProcess() {
     int p0;
     InputControl inputControl;
+    Settings* s = new Settings();
+    inputControl.init(*s);
     int result = inputControl.process(p0);
-    if (true /*check result*/) {
-        CPPUNIT_ASSERT(false);
-    }
+    CPPUNIT_ASSERT(result == 0);
 }
 

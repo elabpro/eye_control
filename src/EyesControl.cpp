@@ -50,13 +50,14 @@ IplImage* EyesControl::detectAndShow() {
     // Get image from Webcam
     image = cvQueryFrame(capture);
     show(*image);
-    detect();
+    detectEyes();
+    getAction();
 }
 
 /**
  * Function to detect eyes on a face with OpenCV2
  */
-int EyesControl::detect() {
+int EyesControl::detectEyes() {
     std::vector<Rect> faces;
     Mat frame_gray;
 
@@ -205,4 +206,40 @@ void EyesControl::RectangleGUI() {
                 cvPoint(635, 60 * (s->keynumberright + 1)),
                 CV_RGB(255, 0, 0), 6, 0, 0);
     }
+}
+
+/**
+ * Find out what to do
+ * 
+ * @return 0 - nothing, 1 - two eyes are open
+ */
+int EyesControl::getAction() {
+    int result = 0;
+    // Two eyes are open
+    if ((s->glaz2 >= ceil(s->glaztime * 0.75))
+            and (s->glaz1 < s->glaz2)) // -25%
+    {
+        s->glaz0 = 0;
+        s->glaz1 = 0;
+        s->glaz2 = 0;
+        s->keynumberleft = 0;
+        s->keynumberright = 0;
+        s->leftglaz = 0;
+        s->rightglaz = 0;
+        result = 1;
+    }
+    
+        //-- Если разница слишком небольшая - идём на ещё один круг по проверке вход.изобр.
+    if (((s->glaz1 >= s->glaztime)
+            and (s->glaz1 > s->glaz2)
+            and (s->glaz2 >= ceil(s->glaztime * 0.8)))) // -20%
+    {
+        s->glaz0 = 0;
+        s->glaz1 = ceil(s->glaztime * 0.35); // -65%
+        s->glaz2 = ceil(s->glaztime * 0.35);
+        s->leftglaz = ceil(s->glaztime * 0.35);
+        s->rightglaz = ceil(s->glaztime * 0.35);
+        result = 2;
+    }
+    return result;
 }

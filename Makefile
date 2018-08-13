@@ -68,7 +68,8 @@ clean: .clean-post
 
 .clean-post: .clean-impl
 # Add your post 'clean' code here...
-
+	rm -r -f tests-report/*
+	rm -f test*.xml
 
 # clobber
 clobber: .clobber-post
