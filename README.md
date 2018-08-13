@@ -2,7 +2,7 @@
 Control PC by using eyes
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-				WARNING!!!
+##				WARNING!!!
 You need to make comortable environment for using this software.
 Software is required good light, open face with open eyes. In some oher cases there can be misunderstanding and you will recieve wrong symbols. Be carefull!
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
