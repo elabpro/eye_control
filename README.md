@@ -19,9 +19,10 @@ For using this software you need:
 run './eyes'
 
 # HOW TO COMPILE
-autoconf
-./configure
-make
+make CONF=Release
+
+# HOW TO BUILD DEB
+bash nbproject/Package-Release.bash
 
 # HOW TO USE
 1. Open any text editor (for example gedit). Create new document and put a mouse focus in the editor field.
