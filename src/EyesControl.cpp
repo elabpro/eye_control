@@ -46,18 +46,24 @@ int EyesControl::init(Settings& newS) {
 EyesControl::~EyesControl() {
 }
 
+/**
+ * Detect eye, show image and make action
+ * 
+ * @return image
+ */
 IplImage* EyesControl::detectAndShow() {
     // Get image from Webcam
     image = cvQueryFrame(capture);
     show(*image);
-    detectEyes();
+    detectEyes(matImage);
     getAction();
+    return image;
 }
 
 /**
  * Function to detect eyes on a face with OpenCV2
  */
-int EyesControl::detectEyes() {
+int EyesControl::detectEyes(Mat mat_image) {
     std::vector<Rect> faces;
     Mat frame_gray;
 
@@ -118,7 +124,7 @@ int EyesControl::detectEyes() {
         /** ПРИ НЕНАХОЖДЕНИИ В КАДРЕ ГЛАЗ */
         if (eyes.size() == 0) {
             //-- Увеличиваем счётчик ненахождения глаз на 1
-            s->glaz0 = s->glaz0 + 1;
+            s->setEye(0);
             //-- Отрисовка лица кругом синего цвета
             Point center(faces[i].x + faces[i].width / 2, faces[i].y + faces[i].height / 2);
             ellipse(mat_image, center, Size(faces[i].width / 2, faces[i].height / 2), 0, 0,
@@ -127,6 +133,7 @@ int EyesControl::detectEyes() {
     }
     //-- Вывод изображения на экран
     imshow(s->window_name, mat_image);
+    matImage = mat_image;
     return 0;
 }
 
@@ -145,7 +152,7 @@ void EyesControl::show(IplImage& img) {
     cv::Mat image2 = imread(fileName);
     cv::Mat image3 = imread(s->mouse_panel_png);
     RectangleGUI();
-    mat_image = cv::cvarrToMat(image) + image2 + image3;
+    matImage = cv::cvarrToMat(image) + image2 + image3;
 }
 
 /**

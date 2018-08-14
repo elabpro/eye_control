@@ -31,7 +31,7 @@ public:
     int init(Settings& newS);
     virtual ~EyesControl();
     IplImage* detectAndShow();
-    int detectEyes();
+    int detectEyes(Mat mat_image);
     void RectangleGUI();
     CascadeClassifier face_cascade;
     CascadeClassifier eyes_cascade;
@@ -41,7 +41,7 @@ private:
     Settings* s;
     CvCapture* capture; // структура, для чтение кадров из камеры
     IplImage* image; // картинка как изображение
-    Mat mat_image; // картинка как матрица
+    Mat matImage; // картинка как матрица
 
 };
 

@@ -22,6 +22,11 @@ Settings::Settings(const Settings& orig) {
 Settings::~Settings() {
 }
 
+/**
+ * Load settings from file
+ * 
+ * @return 
+ */
 int Settings::load() {
     int result = 0;
     //-- Каскады
@@ -68,6 +73,13 @@ int Settings::load() {
     return result;
 }
 
+/**
+ * set counter for eyes in value
+ * 
+ * @param number eye's number
+ * @param value new value
+ * @return 
+ */
 int Settings::setEye(int number, int value) {
     int* g;
     switch (number) {
@@ -90,6 +102,12 @@ int Settings::setEye(int number, int value) {
     return *g;
 }
 
+/**
+ * increase counter for eyes
+ * 
+ * @param number eye's number
+ * @return 
+ */
 int Settings::setEye(int number) {
     int* g;
     switch (number) {
