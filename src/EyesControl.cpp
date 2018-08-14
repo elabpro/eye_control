@@ -76,9 +76,9 @@ int EyesControl::detectEyes() {
                 Size(35, 35));
 
         /** ПРИ НАХОЖДЕНИИ В КАДРЕ ОДНОГО ГЛАЗА */
-        if (eyes.size() == 1) {
+        if (eyes.size() == 1 || eyes.size() == 2) {
             //-- Увеличиваем счётчик количества одного глаза на 1
-            s->glaz1 = s->glaz1 + 1;
+            s->setEye(eyes.size());
             //-- Отрисовка лица кругом синего цвета
             Point center(faces[i].x + faces[i].width / 2, faces[i].y + faces[i].height / 2);
             ellipse(mat_image, center, Size(faces[i].width / 2, faces[i].height / 2), 0, 0, 360,
@@ -104,40 +104,15 @@ int EyesControl::detectEyes() {
                     s->leftglaz = s->leftglaz + 1;
                 }
             }
-        }
-        /** ПРИ НАХОЖДЕНИИ В КАДРЕ ДВУХ ГЛАЗ */
-        if (eyes.size() == 2) {
-            //-- Увеличиваем счётчик количества двух глаз на 1
-            s->glaz2 = s->glaz2 + 1;
-            //-- Отрисовка лица кругом синего цвета
-            Point center(faces[i].x + faces[i].width / 2, faces[i].y + faces[i].height / 2);
-            ellipse(mat_image, center, Size(faces[i].width / 2, faces[i].height / 2), 0, 0, 360,
-                    Scalar(255, 0, 0), 6, 8, 0);
-
-            for (size_t j = 0; j < eyes.size(); j++) {
-                //-- Отрисовка глаз
-                Point eye_center(faces[i].x + eyes[j].x + eyes[j].width / 2, faces[i].y +
-                        eyes[j].y + eyes[j].height / 2);
-                int radius = cvRound((eyes[j].width + eyes[j].height)*0.25);
-                //-- Который находится влевой части изображения
-                if (center.x < eye_center.x) {
-                    circle(mat_image, eye_center, radius, Scalar(0, 0, 0), 3, 8, 0);
-                }
-                //-- Который находится вправой части изображения
-                if (center.x > eye_center.x) {
-                    circle(mat_image, eye_center, radius, Scalar(0, 0, 0), 3, 8, 0);
-                }
+        } else {
+            if (eyes.size() > 2) {
+                /** ПРИ НАХОЖДЕНИИ В КАДРЕ БОЛЕЕ ДВУХ ГЛАЗ */
+                s->setEye(0, 1);
+                s->setEye(1, 1);
+                s->setEye(2, 1);
+                s->leftglaz = 1;
+                s->rightglaz = 1;
             }
-        }
-
-
-        /** ПРИ НАХОЖДЕНИИ В КАДРЕ БОЛЕЕ ДВУХ ГЛАЗ */
-        if (eyes.size() > 2) {
-            s->glaz0 = 1;
-            s->glaz1 = 1;
-            s->glaz2 = 1;
-            s->leftglaz = 1;
-            s->rightglaz = 1;
         }
 
         /** ПРИ НЕНАХОЖДЕНИИ В КАДРЕ ГЛАЗ */
@@ -159,22 +134,18 @@ int EyesControl::detectEyes() {
  * Show webcam image with detected eyes and keyboard(?)
  */
 void EyesControl::show(IplImage& img) {
+    String fileName;
     // Если текущая раскладка -- английская
     if (s->language == 1) {
-        cv::Mat image2 = imread("../data/alfavit_eng.png");
-        cv::Mat image3 = imread("../data/mousepanel.png");
+        fileName = s->alfavit_eng_png;
+    } else {
         // Отрисовка выбранной буквы, или пиктограммы
-        RectangleGUI();
-        mat_image = cv::cvarrToMat(image) + image2 + image3;
+        fileName = s->alfavit_rus_png;
     }
-    // Если текущая раскладка -- русская
-    if (s->language == 2) {
-        cv::Mat image2 = imread("../data/alfavit_rus.png");
-        cv::Mat image3 = imread("../data/mousepanel.png");
-        // Отрисовка выбранной буквы, или пиктограммы
-        RectangleGUI();
-        mat_image = cv::cvarrToMat(image) + image2 + image3;
-    }
+    cv::Mat image2 = imread(fileName);
+    cv::Mat image3 = imread(s->mouse_panel_png);
+    RectangleGUI();
+    mat_image = cv::cvarrToMat(image) + image2 + image3;
 }
 
 /**
@@ -218,9 +189,9 @@ int EyesControl::getAction() {
     // Two eyes are open
     if ((s->glaz2 >= ceil(s->glaztime * 0.75))
             && (s->glaz1 < s->glaz2)) {
-        s->glaz0 = 0;
-        s->glaz1 = 0;
-        s->glaz2 = 0;
+        s->setEye(0, 0);
+        s->setEye(1, 0);
+        s->setEye(2, 0);
         s->keynumberleft = 0;
         s->keynumberright = 0;
         s->leftglaz = 0;
@@ -232,9 +203,9 @@ int EyesControl::getAction() {
     if (((s->glaz1 >= s->glaztime)
             && (s->glaz1 > s->glaz2)
             && (s->glaz2 >= ceil(s->glaztime * 0.8)))) {
-        s->glaz0 = 0;
-        s->glaz1 = ceil(s->glaztime * 0.35); // -65%
-        s->glaz2 = ceil(s->glaztime * 0.35);
+        s->setEye(0, 0);
+        s->setEye(1, ceil(s->glaztime * 0.35)); // -65%
+        s->setEye(2, ceil(s->glaztime * 0.35));
         s->leftglaz = ceil(s->glaztime * 0.35);
         s->rightglaz = ceil(s->glaztime * 0.35);
         result = 2;

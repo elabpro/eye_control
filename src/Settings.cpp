@@ -30,6 +30,9 @@ int Settings::load() {
     //-- Алфавиты
     alfavit_eng = "abcdefghijklmnopqrstuvwxyz";
     alfavit_rus = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+    alfavit_rus_png = "data/alfavit_eng.png";
+    alfavit_eng_png = "data/alfavit_rus.png";
+    mouse_panel_png = "data/mousepanel.png";
     window_name = "PC control eyes";
     //-- Устанавливаем начальные значения
     glaz0 = 0;
@@ -83,10 +86,28 @@ int Settings::setEye(int number, int value) {
             g = &glaz0;
         }
     }
-    if (value > 0) {
-        *g = value;
-    } else {
-        *g = *g + 1;
+    *g = value;
+    return *g;
+}
+
+int Settings::setEye(int number) {
+    int* g;
+    switch (number) {
+        case 1:
+        {
+            g = &glaz1;
+            break;
+        }
+        case 2:
+        {
+            g = &glaz2;
+            break;
+        }
+        default:
+        {
+            g = &glaz0;
+        }
     }
+    *g = *g + 1;
     return *g;
 }
