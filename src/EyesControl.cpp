@@ -121,6 +121,16 @@ int EyesControl::detectEyes(Mat mat_image) {
             }
         }
 
+
+        /** ПРИ НАХОЖДЕНИИ В КАДРЕ БОЛЕЕ ДВУХ ГЛАЗ */
+        if (eyes.size() > 2) {
+            s->glaz0 = 1;
+            s->glaz1 = 1;
+            s->glaz2 = 1;
+            s->leftglaz = 1;
+            s->rightglaz = 1;
+        }
+
         /** ПРИ НЕНАХОЖДЕНИИ В КАДРЕ ГЛАЗ */
         if (eyes.size() == 0) {
             //-- Увеличиваем счётчик ненахождения глаз на 1
