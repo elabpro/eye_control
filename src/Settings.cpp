@@ -129,3 +129,22 @@ int Settings::setEye(int number) {
     *g = *g + 1;
     return *g;
 }
+
+/**
+ * Change language
+ * 
+ * @return lang number
+ */
+int Settings::changeLanguage(){
+    language = 3 - language;
+    return language;
+}
+
+/**
+ * Change language
+ * 
+ * @return lang number
+ */
+int Settings::getLanguage(){
+    return language;
+}

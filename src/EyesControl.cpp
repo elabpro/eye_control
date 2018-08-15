@@ -153,7 +153,7 @@ int EyesControl::detectEyes(Mat mat_image) {
 void EyesControl::show(IplImage& img) {
     String fileName;
     // Если текущая раскладка -- английская
-    if (s->language == 1) {
+    if (s->getLanguage() == 1) {
         fileName = s->alfavit_eng_png;
     } else {
         // Отрисовка выбранной буквы, или пиктограммы
@@ -174,7 +174,7 @@ void EyesControl::show(IplImage& img) {
 void EyesControl::RectangleGUI() {
     if (s->regime == 1) {
         // Keyboard mode
-        if (s->language == 1) {
+        if (s->getLanguage() == 1) {
             // English
             cvRectangle(image,
                     cvPoint(25 * (s->keynumberleft - 1), 420),

@@ -21,6 +21,7 @@ class SettingsTest : public CPPUNIT_NS::TestFixture {
 
     CPPUNIT_TEST(testLoad);
     CPPUNIT_TEST(testSetEye);
+    CPPUNIT_TEST(testLanguage);
 
     CPPUNIT_TEST_SUITE_END();
 
@@ -33,6 +34,7 @@ public:
 private:
     void testLoad();
     void testSetEye();
+    void testLanguage();
 
 };
 

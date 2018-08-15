@@ -45,7 +45,6 @@ public:
     int glaztimekeyboard; // счётчик времени переключения раскладки клавиатуры
     int glaztime; // счётчик времени для срабатывания событий
     int mousespeed; // счётчик скорости передвижения мыши
-    int language; // 1 - английский, 2 - русский
     //-- Алфавиты
     String alfavit_eng;
     String alfavit_rus;
@@ -55,7 +54,10 @@ public:
     String window_name;
     int setEye(int, int);
     int setEye(int);
+    int getLanguage();
+    int changeLanguage();
 private:
+    int language; // 1 - английский, 2 - русский
 };
 
 #endif /* SETTINGS_H */

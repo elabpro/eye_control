@@ -44,6 +44,7 @@ int InputControl::process(int regime) {
 
 /**
  * Manipulate with keyboard
+ * 
  * @return 0 - unknown, 1 - change language
  */
 int InputControl::InputKey() {
@@ -54,14 +55,10 @@ int InputControl::InputKey() {
     if ((s->glaz0 >= s->glaztimekeyboard)
             and (s->glaz1 <= ceil(s->glaztimekeyboard * 0.85))
             and (s->glaz2 <= ceil(s->glaztimekeyboard * 0.85))) {
-        if (s->language == 1) {
-            s->language = 2;
-        } else {
-            s->language = 1;
-        }
-        s->glaz0 = 0;
-        s->glaz1 = 0;
-        s->glaz2 = 0;
+        s->changeLanguage();
+        s->setEye(0, 0);
+        s->setEye(1, 0);
+        s->setEye(2, 0);
         s->keynumberleft = 0;
         s->keynumberright = 0;
         s->leftglaz = 0;
@@ -75,41 +72,41 @@ int InputControl::InputKey() {
             and (s->leftglaz >= s->glaztime)
             and (s->leftglaz > s->rightglaz)) {
         //-- Если язык ввода английский, то...
-        if (s->language == 1) {
+        if (s->getLanguage() == 1) {
             // Если не буква 'a', то удаляем предыдущий символ
             if (s->keynumberleft != 0) {
-                system("xdotool key BackSpace");
+                makeMove("xdotool key BackSpace");
             }
             // Предварительная очистка
             s->command = "";
             // Запись буквы из алфавита
             s->command = "xdotool type " + s->alfavit_eng.substr(s->keynumberleft, 1);
             // Выполняем команду в терминале
-            system(s->command.c_str());
+            makeMove(s->command);
             s->keynumberleft = s->keynumberleft + 1;
             if (s->keynumberleft == 26) {
                 s->keynumberleft = 0;
             }
         }
         //-- Если язык ввода русский, то...
-        if (s->language == 2) {
+        if (s->getLanguage() == 2) {
             // Если не буква 'a', то удаляем предыдущий символ
             if (s->keynumberleft != 0) {
-                system("xdotool key BackSpace");
+                makeMove("xdotool key BackSpace");
             }
             // Предварительная очистка
             s->command = "";
             // Запись буквы из алфавита
             s->command = "xdotool type " + s->alfavit_rus.substr(s->keynumberleft, 1);
             // Выполняем команду в терминале
-            system(s->command.c_str());
+            makeMove(s->command);
             s->keynumberleft = s->keynumberleft + 1;
             if (s->keynumberleft == 33) {
                 s->keynumberleft = 0;
             }
         }
         //-- Для удобства, ускоряем ввод последующих букв
-        s->glaz0 = 0;
+        s->setEye(0, 0);
         s->glaz1 = ceil(s->glaztime * 0.3); // -70%
         s->glaz2 = ceil(s->glaztime * 0.3);
         s->leftglaz = ceil(s->glaztime * 0.3);
@@ -123,17 +120,17 @@ int InputControl::InputKey() {
             and (s->rightglaz > s->leftglaz)) {
         switch (s->keynumberright) {
             case 0:
-                system("xdotool key space");
+                makeMove("xdotool key space");
                 s->keynumberright = s->keynumberright + 1;
                 break;
             case 1:
-                system("xdotool key BackSpace");
-                system("xdotool key KP_Enter");
+                makeMove("xdotool key BackSpace");
+                makeMove("xdotool key KP_Enter");
                 s->keynumberright = s->keynumberright + 1;
                 break;
             case 2:
-                system("xdotool key BackSpace");
-                system("xdotool key BackSpace");
+                makeMove("xdotool key BackSpace");
+                makeMove("xdotool key BackSpace");
                 s->keynumberright = s->keynumberright + 1;
                 break;
             case 3:
@@ -141,7 +138,7 @@ int InputControl::InputKey() {
                 s->regime = 2;
         }
         //-- Для удобства, ускоряем ввод последующих букв
-        s->glaz0 = 0;
+        s->setEye(0, 0);
         s->glaz1 = ceil(s->glaztime * 0.3);
         s->glaz2 = ceil(s->glaztime * 0.3);
         s->leftglaz = 0;
@@ -160,9 +157,9 @@ int InputControl::InputMouse() {
             and (s->glaz1 <= ceil(s->glaztimekeyboard * 0.85))
             and (s->glaz2 <= ceil(s->glaztimekeyboard * 0.85))) {
         s->regime = 1;
-        s->glaz0 = 0;
-        s->glaz1 = 0;
-        s->glaz2 = 0;
+        s->setEye(0, 0);
+        s->setEye(1, 0);
+        s->setEye(2, 0);
         s->keynumberleft = 0;
         s->keynumberright = 0;
         s->leftglaz = 0;
@@ -207,12 +204,11 @@ int InputControl::InputMouse() {
             s->command = s->command + " 0";
         }
 
-        // Выполняем команду в терминале
-        system(s->command.c_str());
+        makeMove(s->command);
         //-- Для удобства, ускоряем ввод последующих букв
-        s->glaz0 = 0;
-        s->glaz1 = ceil(s->glaztime * 0.2); // -80%
-        s->glaz2 = ceil(s->glaztime * 0.2);
+        s->setEye(0, 0);
+        s->setEye(1, ceil(s->glaztime * 0.2)); // -80%
+        s->setEye(2, ceil(s->glaztime * 0.2));
         s->leftglaz = ceil(s->glaztime * 0.2);
         s->rightglaz = 0;
     }
@@ -247,11 +243,22 @@ int InputControl::InputMouse() {
 
         }
         //-- Для удобства, ускоряем ввод
-        s->glaz0 = 0;
-        s->glaz1 = ceil(s->glaztime * 0.2);
-        s->glaz2 = ceil(s->glaztime * 0.2);
+        s->setEye(0, 0);
+        s->setEye(1, ceil(s->glaztime * 0.2));
+        s->setEye(2, ceil(s->glaztime * 0.2));
         s->leftglaz = 0;
         s->rightglaz = ceil(s->glaztime * 0.2);
     }
     return result;
+}
+
+/**
+ * Use xdotool to make a move
+ * 
+ * @param command
+ * @return 
+ */
+int InputControl::makeMove(String command) {
+    // Выполняем команду в терминале
+    return system(command.c_str());
 }

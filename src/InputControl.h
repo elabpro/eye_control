@@ -28,6 +28,8 @@ public:
 private:
     Settings* s;
     int InputKey();
+    int changeLanguage();
+    int makeMove(String);
     int InputMouse();
 };
 

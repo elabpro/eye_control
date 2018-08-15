@@ -40,6 +40,20 @@ void SettingsTest::testSetEye() {
     settings = new Settings();
     int result = settings->setEye(1,1);
     CPPUNIT_ASSERT(result == 1);
-    result = settings->setEye(1,0);
+    result = settings->setEye(1);
     CPPUNIT_ASSERT(result == 2);
+}
+
+void SettingsTest::testLanguage(){
+    Settings* settings;
+    settings = new Settings();
+    settings->load();
+    int result = settings->getLanguage();
+    CPPUNIT_ASSERT(result == 1);
+    result = settings->changeLanguage();
+    CPPUNIT_ASSERT(result == 2);
+    result = settings->getLanguage();
+    CPPUNIT_ASSERT(result == 2);
+    result = settings->changeLanguage();
+    CPPUNIT_ASSERT(result == 1);
 }
