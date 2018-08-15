@@ -52,25 +52,25 @@ int InputControl::InputKey() {
 
     //-- Условия для смены раскладки клавиатуры
     // Condition to change language
-    if ((s->glaz0 >= s->glaztimekeyboard)
-            and (s->glaz1 <= ceil(s->glaztimekeyboard * 0.85))
-            and (s->glaz2 <= ceil(s->glaztimekeyboard * 0.85))) {
+    if ((s->getEye(0) >= s->glaztimekeyboard)
+            and (s->getEye(1) <= ceil(s->glaztimekeyboard * 0.85))
+            and (s->getEye(2) <= ceil(s->glaztimekeyboard * 0.85))) {
         s->changeLanguage();
         s->setEye(0, 0);
         s->setEye(1, 0);
         s->setEye(2, 0);
         s->keynumberleft = 0;
         s->keynumberright = 0;
-        s->leftglaz = 0;
-        s->rightglaz = 0;
+        s->setEye(3, 0);
+        s->setEye(4, 0);
         result = 1;
     }
 
     //-- Условие проверки, когда левый глаз закрыт
-    if ((s->glaz1 >= s->glaztime)
-            and (s->glaz1 > s->glaz2)
-            and (s->leftglaz >= s->glaztime)
-            and (s->leftglaz > s->rightglaz)) {
+    if ((s->getEye(1) >= s->glaztime)
+            and (s->getEye(1) > s->getEye(2))
+            and (s->getEye(3) >= s->glaztime)
+            and (s->getEye(3) > s->getEye(4))) {
         //-- Если язык ввода английский, то...
         if (s->getLanguage() == 1) {
             // Если не буква 'a', то удаляем предыдущий символ
@@ -107,17 +107,17 @@ int InputControl::InputKey() {
         }
         //-- Для удобства, ускоряем ввод последующих букв
         s->setEye(0, 0);
-        s->glaz1 = ceil(s->glaztime * 0.3); // -70%
-        s->glaz2 = ceil(s->glaztime * 0.3);
-        s->leftglaz = ceil(s->glaztime * 0.3);
-        s->rightglaz = 0;
+        s->setEye(1, ceil(s->glaztime * 0.3)); // -70%
+        s->setEye(2, ceil(s->glaztime * 0.3));
+        s->setEye(3, ceil(s->glaztime * 0.3));
+        s->setEye(4, 0);
     }
 
     //-- Условие проверки, когда правый глаз закрыт
-    if ((s->glaz1 >= s->glaztime)
-            and (s->glaz1 > s->glaz2)
-            and (s->rightglaz >= s->glaztime)
-            and (s->rightglaz > s->leftglaz)) {
+    if ((s->getEye(1) >= s->glaztime)
+            and (s->getEye(1) > s->getEye(2))
+            and (s->getEye(4) >= s->glaztime)
+            and (s->getEye(4) > s->getEye(3))) {
         switch (s->keynumberright) {
             case 0:
                 makeMove("xdotool key space");
@@ -139,10 +139,10 @@ int InputControl::InputKey() {
         }
         //-- Для удобства, ускоряем ввод последующих букв
         s->setEye(0, 0);
-        s->glaz1 = ceil(s->glaztime * 0.3);
-        s->glaz2 = ceil(s->glaztime * 0.3);
-        s->leftglaz = 0;
-        s->rightglaz = ceil(s->glaztime * 0.3);
+        s->setEye(1, ceil(s->glaztime * 0.3));
+        s->setEye(2, ceil(s->glaztime * 0.3));
+        s->setEye(3, 0);
+        s->setEye(4, ceil(s->glaztime * 0.3));
     }
     return result;
 }
@@ -153,24 +153,24 @@ int InputControl::InputKey() {
 int InputControl::InputMouse() {
     int result = 0;
     //-- Условия для перехода в режим клавиатуры
-    if ((s->glaz0 >= s->glaztimekeyboard)
-            and (s->glaz1 <= ceil(s->glaztimekeyboard * 0.85))
-            and (s->glaz2 <= ceil(s->glaztimekeyboard * 0.85))) {
+    if ((s->getEye(0) >= s->glaztimekeyboard)
+            and (s->getEye(1) <= ceil(s->glaztimekeyboard * 0.85))
+            and (s->getEye(2) <= ceil(s->glaztimekeyboard * 0.85))) {
         s->regime = 1;
         s->setEye(0, 0);
         s->setEye(1, 0);
         s->setEye(2, 0);
         s->keynumberleft = 0;
         s->keynumberright = 0;
-        s->leftglaz = 0;
-        s->rightglaz = 0;
+        s->setEye(3, 0);
+        s->setEye(4, 0);
     }
 
     //-- Условие проверки, когда левый глаз закрыт
-    if ((s->glaz1 >= s->glaztime)
-            and (s->glaz1 > s->glaz2)
-            and (s->leftglaz >= s->glaztime)
-            and (s->leftglaz > s->rightglaz)) {
+    if ((s->getEye(1) >= s->glaztime)
+            and (s->getEye(1) > s->getEye(2))
+            and (s->getEye(3) >= s->glaztime)
+            and (s->getEye(3) > s->getEye(4))) {
         // Предварительная очистка
         s->command = "";
         // Нажатие левой кнопки мыши
@@ -209,15 +209,15 @@ int InputControl::InputMouse() {
         s->setEye(0, 0);
         s->setEye(1, ceil(s->glaztime * 0.2)); // -80%
         s->setEye(2, ceil(s->glaztime * 0.2));
-        s->leftglaz = ceil(s->glaztime * 0.2);
-        s->rightglaz = 0;
+        s->setEye(3, ceil(s->glaztime * 0.2));
+        s->setEye(4, 0);
     }
 
     //-- Условие проверки, когда правый глаз закрыт
-    if ((s->glaz1 >= s->glaztime)
-            and (s->glaz1 > s->glaz2)
-            and (s->rightglaz >= s->glaztime)
-            and (s->rightglaz > s->leftglaz)) {
+    if ((s->getEye(1) >= s->glaztime)
+            and (s->getEye(1) > s->getEye(2))
+            and (s->getEye(4) >= s->glaztime)
+            and (s->getEye(4) > s->getEye(3))) {
         switch (s->keynumberright) {
             case 0:
                 s->keynumberright = s->keynumberright + 1;
@@ -246,8 +246,8 @@ int InputControl::InputMouse() {
         s->setEye(0, 0);
         s->setEye(1, ceil(s->glaztime * 0.2));
         s->setEye(2, ceil(s->glaztime * 0.2));
-        s->leftglaz = 0;
-        s->rightglaz = ceil(s->glaztime * 0.2);
+        s->setEye(3, 0);
+        s->setEye(4, ceil(s->glaztime * 0.2));
     }
     return result;
 }

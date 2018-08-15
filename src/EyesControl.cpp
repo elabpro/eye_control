@@ -100,14 +100,14 @@ int EyesControl::detectEyes(Mat mat_image) {
                 if (center.x < eye_center.x) {
                     circle(mat_image, eye_center, radius, Scalar(0, 0, 0), 3, 8, 0);
                     //-- Увеличиваем счётчик на 1
-                    s->rightglaz = s->rightglaz + 1;
+                    s->setEye(4);
                 }
                 //-- Который находится вправой части изображения,
                 //-- ввиду зеркального изображения
                 if (center.x > eye_center.x) {
                     circle(mat_image, eye_center, radius, Scalar(0, 0, 0), 3, 8, 0);
                     //-- Увеличиваем счётчик на 1
-                    s->leftglaz = s->leftglaz + 1;
+                    s->setEye(3);
                 }
             }
         } else {
@@ -116,19 +116,9 @@ int EyesControl::detectEyes(Mat mat_image) {
                 s->setEye(0, 1);
                 s->setEye(1, 1);
                 s->setEye(2, 1);
-                s->leftglaz = 1;
-                s->rightglaz = 1;
+                s->setEye(3, 1);
+                s->setEye(4, 1);
             }
-        }
-
-
-        /** ПРИ НАХОЖДЕНИИ В КАДРЕ БОЛЕЕ ДВУХ ГЛАЗ */
-        if (eyes.size() > 2) {
-            s->glaz0 = 1;
-            s->glaz1 = 1;
-            s->glaz2 = 1;
-            s->leftglaz = 1;
-            s->rightglaz = 1;
         }
 
         /** ПРИ НЕНАХОЖДЕНИИ В КАДРЕ ГЛАЗ */
@@ -204,27 +194,27 @@ void EyesControl::RectangleGUI() {
 int EyesControl::getAction() {
     int result = 0;
     // Two eyes are open
-    if ((s->glaz2 >= ceil(s->glaztime * 0.75))
-            && (s->glaz1 < s->glaz2)) {
+    if ((s->getEye(2) >= ceil(s->glaztime * 0.75))
+            && (s->getEye(1) < s->getEye(2))) {
         s->setEye(0, 0);
         s->setEye(1, 0);
         s->setEye(2, 0);
         s->keynumberleft = 0;
         s->keynumberright = 0;
-        s->leftglaz = 0;
-        s->rightglaz = 0;
+        s->setEye(3, 0);
+        s->setEye(4, 0);
         result = 1;
     }
 
     //-- Если разница слишком небольшая - идём на ещё один круг по проверке вход.изобр.
-    if (((s->glaz1 >= s->glaztime)
-            && (s->glaz1 > s->glaz2)
-            && (s->glaz2 >= ceil(s->glaztime * 0.8)))) {
+    if (((s->getEye(1) >= s->glaztime)
+            && (s->getEye(1) > s->getEye(2))
+            && (s->getEye(2) >= ceil(s->glaztime * 0.8)))) {
         s->setEye(0, 0);
         s->setEye(1, ceil(s->glaztime * 0.35)); // -65%
         s->setEye(2, ceil(s->glaztime * 0.35));
-        s->leftglaz = ceil(s->glaztime * 0.35);
-        s->rightglaz = ceil(s->glaztime * 0.35);
+        s->setEye(3, ceil(s->glaztime * 0.35));
+        s->setEye(4, ceil(s->glaztime * 0.35));
         result = 2;
     }
     return result;

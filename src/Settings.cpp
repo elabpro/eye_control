@@ -78,26 +78,10 @@ int Settings::load() {
  * 
  * @param number eye's number
  * @param value new value
- * @return 
+ * @return new value
  */
 int Settings::setEye(int number, int value) {
-    int* g;
-    switch (number) {
-        case 1:
-        {
-            g = &glaz1;
-            break;
-        }
-        case 2:
-        {
-            g = &glaz2;
-            break;
-        }
-        default:
-        {
-            g = &glaz0;
-        }
-    }
+    int* g = getEyePointer(number);
     *g = value;
     return *g;
 }
@@ -106,9 +90,26 @@ int Settings::setEye(int number, int value) {
  * increase counter for eyes
  * 
  * @param number eye's number
- * @return 
+ * @return new value
  */
 int Settings::setEye(int number) {
+    int* g = getEyePointer(number);
+    *g = *g + 1;
+    return *g;
+}
+
+/**
+ * Get current value for an eye
+ * 
+ * @param eye's number 
+ * @return value
+ */
+int Settings::getEye(int number) {
+    int* g = getEyePointer(number);
+    return *g;
+}
+
+int* Settings::getEyePointer(int number) {
     int* g;
     switch (number) {
         case 1:
@@ -121,13 +122,22 @@ int Settings::setEye(int number) {
             g = &glaz2;
             break;
         }
+        case 3:
+        {
+            g = &leftglaz;
+            break;
+        }
+        case 4:
+        {
+            g = &rightglaz;
+            break;
+        }
         default:
         {
             g = &glaz0;
         }
     }
-    *g = *g + 1;
-    return *g;
+    return g;
 }
 
 /**
@@ -135,7 +145,7 @@ int Settings::setEye(int number) {
  * 
  * @return lang number
  */
-int Settings::changeLanguage(){
+int Settings::changeLanguage() {
     language = 3 - language;
     return language;
 }
@@ -145,6 +155,6 @@ int Settings::changeLanguage(){
  * 
  * @return lang number
  */
-int Settings::getLanguage(){
+int Settings::getLanguage() {
     return language;
 }

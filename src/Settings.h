@@ -32,11 +32,6 @@ public:
     String face_cascade_name;
     String eyes_cascade_name;
     //================== Глобальные переменные =====================
-    int glaz0; // Счётчик, когда глаза не обнаружены (No eyes)
-    int glaz1; // Счётчик для одного глаза (One eye)
-    int glaz2; // Счётчик для двух глаз (Two eyes)
-    int leftglaz; // Условие, если это левый глаз (Left eye)
-    int rightglaz; // Условие, если это правый глаз (Right eye)
     int keynumberleft; // Номер позиции клавиши, когда закрыт левый глаз
     int keynumberright; // Номер позиции клавиши, когда закрыт правый глаз
     String command; // Команда для терминала Linux
@@ -56,8 +51,15 @@ public:
     int setEye(int);
     int getLanguage();
     int changeLanguage();
+    int getEye(int);
 private:
     int language; // 1 - английский, 2 - русский
+    int glaz0; // Счётчик, когда глаза не обнаружены (No eyes, 0)
+    int glaz1; // Счётчик для одного глаза (One eye, 1)
+    int glaz2; // Счётчик для двух глаз (Two eyes, 2)
+    int leftglaz; // Условие, если это левый глаз (Left eye, 3)
+    int rightglaz; // Условие, если это правый глаз (Right eye, 4)
+    int* getEyePointer(int);
 };
 
 #endif /* SETTINGS_H */
