@@ -34,17 +34,12 @@ public:
     //================== Глобальные переменные =====================
     int keynumberleft; // Номер позиции клавиши, когда закрыт левый глаз
     int keynumberright; // Номер позиции клавиши, когда закрыт правый глаз
-    String command; // Команда для терминала Linux
     int regime; // Режим работы. 1 - клавиатура, 2 - мышь
 
     int glaztimekeyboard; // счётчик времени переключения раскладки клавиатуры
     int glaztime; // счётчик времени для срабатывания событий
     int mousespeed; // счётчик скорости передвижения мыши
     //-- Алфавиты
-    String alfavit_eng;
-    String alfavit_rus;
-    String alfavit_rus_png;
-    String alfavit_eng_png;
     String mouse_panel_png;
     String window_name;
     int setEye(int, int);
@@ -52,6 +47,9 @@ public:
     int getLanguage();
     int changeLanguage();
     int getEye(int);
+    int getTime(int);
+    String getAlfavit();
+    String getAlfavitImage();
 private:
     int language; // 1 - английский, 2 - русский
     int glaz0; // Счётчик, когда глаза не обнаружены (No eyes, 0)
@@ -60,6 +58,10 @@ private:
     int leftglaz; // Условие, если это левый глаз (Left eye, 3)
     int rightglaz; // Условие, если это правый глаз (Right eye, 4)
     int* getEyePointer(int);
+    String alfavit_eng;
+    String alfavit_rus;
+    String alfavit_rus_png;
+    String alfavit_eng_png;
 };
 
 #endif /* SETTINGS_H */

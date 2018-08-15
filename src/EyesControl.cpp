@@ -141,15 +141,7 @@ int EyesControl::detectEyes(Mat mat_image) {
  * Show webcam image with detected eyes and keyboard(?)
  */
 void EyesControl::show(IplImage& img) {
-    String fileName;
-    // Если текущая раскладка -- английская
-    if (s->getLanguage() == 1) {
-        fileName = s->alfavit_eng_png;
-    } else {
-        // Отрисовка выбранной буквы, или пиктограммы
-        fileName = s->alfavit_rus_png;
-    }
-    cv::Mat image2 = imread(fileName);
+    cv::Mat image2 = imread(s->getAlfavitImage());
     cv::Mat image3 = imread(s->mouse_panel_png);
     RectangleGUI();
     matImage = cv::cvarrToMat(image) + image2 + image3;

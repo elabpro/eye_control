@@ -49,6 +49,7 @@ int InputControl::process(int regime) {
  */
 int InputControl::InputKey() {
     int result = 0;
+    String command;
 
     //-- Условия для смены раскладки клавиатуры
     // Condition to change language
@@ -71,36 +72,22 @@ int InputControl::InputKey() {
             and (s->getEye(1) > s->getEye(2))
             and (s->getEye(3) >= s->glaztime)
             and (s->getEye(3) > s->getEye(4))) {
-        //-- Если язык ввода английский, то...
+        // Если не буква 'a', то удаляем предыдущий символ
+        if (s->keynumberleft != 0) {
+            makeMove("xdotool key BackSpace");
+        }
+        // Запись буквы из алфавита
+        command = "xdotool type " + s->getAlfavit().substr(s->keynumberleft, 1);
+        // Выполняем команду в терминале
+        makeMove(command);
+        s->keynumberleft = s->keynumberleft + 1;
         if (s->getLanguage() == 1) {
-            // Если не буква 'a', то удаляем предыдущий символ
-            if (s->keynumberleft != 0) {
-                makeMove("xdotool key BackSpace");
-            }
-            // Предварительная очистка
-            s->command = "";
-            // Запись буквы из алфавита
-            s->command = "xdotool type " + s->alfavit_eng.substr(s->keynumberleft, 1);
-            // Выполняем команду в терминале
-            makeMove(s->command);
-            s->keynumberleft = s->keynumberleft + 1;
+            //-- Если язык ввода английский, то...
             if (s->keynumberleft == 26) {
                 s->keynumberleft = 0;
             }
-        }
-        //-- Если язык ввода русский, то...
-        if (s->getLanguage() == 2) {
-            // Если не буква 'a', то удаляем предыдущий символ
-            if (s->keynumberleft != 0) {
-                makeMove("xdotool key BackSpace");
-            }
-            // Предварительная очистка
-            s->command = "";
-            // Запись буквы из алфавита
-            s->command = "xdotool type " + s->alfavit_rus.substr(s->keynumberleft, 1);
-            // Выполняем команду в терминале
-            makeMove(s->command);
-            s->keynumberleft = s->keynumberleft + 1;
+        } else {
+            //-- Если язык ввода русский, то...
             if (s->keynumberleft == 33) {
                 s->keynumberleft = 0;
             }
@@ -152,6 +139,7 @@ int InputControl::InputKey() {
  */
 int InputControl::InputMouse() {
     int result = 0;
+    String command;
     //-- Условия для перехода в режим клавиатуры
     if ((s->getEye(0) >= s->glaztimekeyboard)
             and (s->getEye(1) <= ceil(s->glaztimekeyboard * 0.85))
@@ -172,39 +160,39 @@ int InputControl::InputMouse() {
             and (s->getEye(3) >= s->glaztime)
             and (s->getEye(3) > s->getEye(4))) {
         // Предварительная очистка
-        s->command = "";
+        command = "";
         // Нажатие левой кнопки мыши
         if (s->keynumberright == 0) {
-            s->command = "xdotool click 1";
+            command = "xdotool click 1";
         }
         // Нажатие правой кнопки мыши
         if (s->keynumberright == 1) {
-            s->command = "xdotool click 3";
+            command = "xdotool click 3";
         }
         // Двойное нажатие левой кнопки мыши
         if (s->keynumberright == 2) {
-            s->command = "xdotool click 1 click 1";
+            command = "xdotool click 1 click 1";
         }
         // Переместить курсор вверх
         if (s->keynumberright == 3) {
-            s->command = "xdotool mousemove_relative 0 -" + s->mousespeed;
+            command = "xdotool mousemove_relative 0 -" + s->mousespeed;
         }
         // Переместить курсор вниз
         if (s->keynumberright == 4) {
-            s->command = "xdotool mousemove_relative 0 " + s->mousespeed;
+            command = "xdotool mousemove_relative 0 " + s->mousespeed;
         }
         // Переместить курсор влево
         if (s->keynumberright == 5) {
-            s->command = "xdotool mousemove_relative -" + s->mousespeed;
-            s->command = s->command + " 0";
+            command = "xdotool mousemove_relative -" + s->mousespeed;
+            command = command + " 0";
         }
         // Переместить курсор вправо
         if (s->keynumberright == 6) {
-            s->command = "xdotool mousemove_relative " + s->mousespeed;
-            s->command = s->command + " 0";
+            command = "xdotool mousemove_relative " + s->mousespeed;
+            command = command + " 0";
         }
 
-        makeMove(s->command);
+        makeMove(command);
         //-- Для удобства, ускоряем ввод последующих букв
         s->setEye(0, 0);
         s->setEye(1, ceil(s->glaztime * 0.2)); // -80%

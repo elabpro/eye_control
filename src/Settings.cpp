@@ -158,3 +158,29 @@ int Settings::changeLanguage() {
 int Settings::getLanguage() {
     return language;
 }
+
+/**
+ * Get letters for the current language
+ * 
+ * @return 
+ */
+String Settings::getAlfavit() {
+
+}
+
+/**
+ * Get image of letters for the current language
+ * 
+ * @return 
+ */
+String Settings::getAlfavitImage() {
+    String fileName;
+    // Если текущая раскладка -- английская
+    if (language == 1) {
+        fileName = alfavit_eng_png;
+    } else {
+        // Отрисовка выбранной буквы, или пиктограммы
+        fileName = alfavit_rus_png;
+    }
+    return fileName;
+}
